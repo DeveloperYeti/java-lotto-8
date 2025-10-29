@@ -18,5 +18,15 @@ public class Method {
         return sum;
     }
 
+    // 돈에 맞게 반복 횟수 만큼 로또 구현하는 로직 구현.
+    public void tryChance(){
+        int chance = devideMoney();
+        for(int i=0; i<chance;i++)
+        {
+            // 로또 번호 뽑는 로직 + 뽑을 때마다 적립금 올라가는 로직 각 항목별로 올리기
+        }
+        //로또 항목별 금액 값 및 리스트 값 출력 로직.
+    }
+
 
 }
