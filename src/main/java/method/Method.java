@@ -2,6 +2,9 @@ package method;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Method {
     // 돈 입력.
     public static int getMoeny(){
@@ -27,6 +30,24 @@ public class Method {
         }
         //로또 항목별 금액 값 및 리스트 값 출력 로직.
     }
+    // 로또 번호 뽑는 로직
+    public List<Integer> pickLotto(){
+        List<Integer> numbers = new ArrayList<>();
 
 
+        numbers.add(1);
+
+        return ;
+    }
+
+    //뽑을 때마다 적립금 올라가는 로직 각 항목별로 올리기
+    public int savingMoneyUp(){
+
+        return 0;
+    }
+    //로또 항목 별 금액 값 및 리스트 출력
+    public List<Integer> printSaveMoney(List<Integer>money){
+
+        return ;
+    }
 }
