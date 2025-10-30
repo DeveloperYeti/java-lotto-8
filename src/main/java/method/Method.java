@@ -61,16 +61,18 @@ public class Method {
     }
     // 로또 번호 입력 받는 로직
     private static int inpputWinningNumber(){
-        System.out.println(System.out.println("당첨 번호를 입력해 주세요.");
+        System.out.println("당첨 번호를 입력해 주세요.");
         String winning = Console.readLine();
 
         return 
     }
-    private static List<String> parseAndValidateNames(String input) {
-        String[] names = input.split(",");
-        Lotto lotto = new Lotto(convertStrList(names));
-
+    // lotto 클래스를 사용하여 검증 및 getNumbers를 사용해서 List<Integer> 반환
+    private static List<Integer> parseAndValidateNumber(String input) {
+        String[] number = input.split(",");
+        Lotto lotto = new Lotto(convertStrList(number));
+        return lotto.getNumbers();
     }
+
     // <Integer> 형으로 입력을 받을 경우 각 부분에 대해서 문자열을 숫자로 바꿔주는 로직 구현.
     public static List<Integer> convertStrList(String[] arr) {
         List<Integer> result = new ArrayList<>();
