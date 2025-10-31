@@ -48,23 +48,21 @@ public class Method {
     }
 
     // 금액 입력만(단일 책임)
-    private static int getMoeny() {
-        String getMoney = Console.readLine();
-        return Integer.parseInt(getMoney.trim());
-    }
-
-    // 금액 유효성 검증 및 반복(단일책임)
     public int getMoneyWithValidation() {
-        try {
-            int money = getMoeny();
-            if (money <= 0 || money % 1000 != 0)
-                throw new IllegalArgumentException(ERROR_MESSAGE);
-            return money;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
+        String input = Console.readLine();
+        if (!isNumeric(input)) {
+            throw new IllegalArgumentException("[ERROR]");
         }
+        int money = Integer.parseInt(input.trim());
+        if (money <= 0 || money % 1000 != 0) {
+            throw new IllegalArgumentException("[ERROR]");
+        }
+        return money;
     }
 
+    private boolean isNumeric(String str) {
+        return str != null && str.matches("\\d+");
+    }
 
     // 발매수량 계산
     public int divideMoney(int totalMoney) {
@@ -84,7 +82,6 @@ public class Method {
     public List<List<Integer>> saveLotto(int count) {
         List<List<Integer>> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            // [translate:불변 리스트를 가변 리스트로 복제]
             List<Integer> lotto = new ArrayList<>(pickLotto());
             lotto.sort(Integer::compareTo);
             lottoList.add(lotto);
@@ -149,7 +146,7 @@ public class Method {
     }
 
     // 보너스 번호 검증
-    public int inputBonusNumberWithValidation(List<Integer> winNumbers) {
+    public int inputBonusNumberValidation(List<Integer> winNumbers) {
         while (true) {
             try {
                 int bonus = inputBonusNumber();
