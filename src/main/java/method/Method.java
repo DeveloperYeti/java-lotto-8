@@ -7,6 +7,7 @@ import lotto.Lotto;
 import java.util.*;
 
 public class Method {
+    public static final String ERROR_MESSAGE = "[ERROR]";
     public enum LottoNumber {
         startInclusive(1), endInclusive(45), count(6);
         private final int value;
@@ -54,17 +55,16 @@ public class Method {
 
     // 금액 유효성 검증 및 반복(단일책임)
     public int getMoneyWithValidation() {
-        while (true) {
-            try {
-                int money = getMoeny();
-                if (money <= 0 || money % 1000 != 0)
-                    throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다.");
-                return money;
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            int money = getMoeny();
+            if (money <= 0 || money % 1000 != 0)
+                throw new IllegalArgumentException(ERROR_MESSAGE);
+            return money;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MESSAGE);
         }
     }
+
 
     // 발매수량 계산
     public int divideMoney(int totalMoney) {
@@ -80,11 +80,12 @@ public class Method {
         );
     }
 
-    // n장 저장 및 오름차순 정렬
+    // n장 저장 및 오름차순 정렬 -> 가변 리스트 변경
     public List<List<Integer>> saveLotto(int count) {
         List<List<Integer>> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            List<Integer> lotto = pickLotto();
+            // [translate:불변 리스트를 가변 리스트로 복제]
+            List<Integer> lotto = new ArrayList<>(pickLotto());
             lotto.sort(Integer::compareTo);
             lottoList.add(lotto);
         }
